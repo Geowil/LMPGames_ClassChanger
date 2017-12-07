@@ -7,9 +7,9 @@ Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_ClassChanger#
 
 Terms of Use: Free non-commercially or commercially; just give credit
 
-
-<img style="display: block; margin: 0 auto;" src="http://i15.photobucket.com/albums/a367/Geowil/Plugins/geowil_classchanger10_zpswmwaqsvf.png" border="0" alt=" photo geowil_classchanger10_zpswmwaqsvf.png"/></a>
-
+<p align="center"> 
+<img src="http://i15.photobucket.com/albums/a367/Geowil/Plugins/geowil_classchanger10_zpswmwaqsvf.png" border="0" alt=" photo geowil_classchanger10_zpswmwaqsvf.png"/></a>
+</p>
 
 ## What is this?
 This repository is for an RPG Maker MV JS plugin which allows the developer to create class level based restrictions for allowing
