@@ -1,5 +1,5 @@
 # Geowil_ClassChanger
-Version: 1.2.1
+Version: 1.1.2
 
 Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo.rar)
 
