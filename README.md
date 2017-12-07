@@ -22,10 +22,12 @@ Novice > Soldier > Veteran > Captain
 
 Within this tree each class requires different levels of the previous classes to change to it:
 
+```
 Novice, starting class so there are no requirements
 Solider, 10 levels in Novice
 Veteran, 25 levels in Novice and 12 in Soldier
 Captain, 45 levels in Novice, 35 in Soldier, and 30 in Veteran
+```
 
 This is a simple example of what you can do with this plugin.  You can also create hybrid classes which require classes from multiple
 class trees.  For example requiring a Soldier and a Mage class to change to a class that can use physical attacks, magical ones, or
