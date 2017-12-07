@@ -14,7 +14,7 @@ a player to change their classes.  In effect this allows the developer to create
 scripting by using class note tags.
 
 
-##How does it work?
+## How does it work?
 It is quite simple.  First, map out your class hierarchy; which classes will be a starting point for a class tree and what levels
 should be required to unlock classes throughout the tree.  For example take this class tree:
 
@@ -35,6 +35,7 @@ What you can do with this plugin is limited only by your creativity and it allow
 about how to accomplish it through an event.
 
 All that needs to be done is to place this tag into the note box on the class you want to create requirements for:
+
 <Requirements>
 cId:lvl
 </Requirements>
@@ -53,6 +54,7 @@ So to continue the example above using the Captain class tree, here is how the C
 ```
 
 Finally just add the following plugin command to an event
+
 `StartClassChange`
 
 
@@ -84,7 +86,7 @@ Right know there are no known conflicts however anything that aliases the follow
 - Game_Actor.prototype.refresh
 
 
-##Version Changelogs
+## Version Changelogs
 - Version 1.1.2 Changelog:
   - Fixed a bug that was causing exceptions to be thrown when viewing the last class
   - Fixed a bug which caused the requirements from the previous class in the class list to show up as the requirements for the current class.
