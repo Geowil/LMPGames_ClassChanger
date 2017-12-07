@@ -1,11 +1,14 @@
 # Geowil_ClassChanger
 Version: 1.2.1
-Demo Available: Yes, [Geowil_ClassChangeDemo.rar (http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo.rar)]
+
+Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo.rar)
+
 Conflicts: Maybe, see Possible Conflicts section
+
 Terms of Use: Free non-commercially or commercially; just give credit
 
 
-##What is this?
+## What is this?
 This repository is for an RPG Maker MV JS plugin which allows the developer to create class level based restrictions for allowing
 a player to change their classes.  In effect this allows the developer to create a class hierarchy without needing complicated event
 scripting by using class note tags.
@@ -54,7 +57,7 @@ Finally just add the following plugin command to an event
 
 
 
-##Current Features
+## Current Features
 - Allows adding requirements to change classes through use of note tags.
 - Will remove all skills from the character at the point of changing classes and assign the skills from the changed to class that the character is eligible to receive.
 - Keeps track of each characters used classes and their levels with those classes and then displays that information within the scene for easy reference.
@@ -62,7 +65,7 @@ Finally just add the following plugin command to an event
 - Freely change between classes. Using existing functionality in MV along with some added bits to retain levels, exp, and removal of prior class skills.
 
 
-##Planned Features
+## Planned Features
 - Optional feature to enable a cost in gold to change to a class
 - Optional feature to enable a cost in item(s) to change to a class (can be enabled at the same time as the gold cost option)
 - Optional feature to restrict classes to genders
@@ -71,7 +74,7 @@ Finally just add the following plugin command to an event
 - Color coding the complete class list to show players what classes their character is eligible to change to without having to select that class to view the requirements.
 
 
-##Conflicts
+## Conflicts
 Right know there are no known conflicts however anything that aliases the following functions may conflict with this plugin:
 
 - DataManager.isDatabaseLoaded
@@ -83,13 +86,13 @@ Right know there are no known conflicts however anything that aliases the follow
 
 ##Version Changelogs
 - Version 1.1.2 Changelog:
-	- Fixed a bug that was causing exceptions to be thrown when viewing the last class
-	- Fixed a bug which caused the requirements from the previous class in the class list to show up as the requirements for the current class.
-	- Fixed a bug where you were not allowed to change to certain classes due to an issue revealed by fixing the previous bug.?
+  - Fixed a bug that was causing exceptions to be thrown when viewing the last class
+  - Fixed a bug which caused the requirements from the previous class in the class list to show up as the requirements for the current class.
+  - Fixed a bug where you were not allowed to change to certain classes due to an issue revealed by fixing the previous bug.?
 
 - Version 1.1.0 Changelog:
-	- Fixed issue where changing between classes was not setting skills in some circumstances.
-	- Fixed issue where first Class List item was blank and the last class in the database was not loaded.?
+  - Fixed issue where changing between classes was not setting skills in some circumstances.
+  - Fixed issue where first Class List item was blank and the last class in the database was not loaded.?
 
 - Version 1.0.0 Changelog:
-	- Initial version of plugin uploaded?
+  - Initial version of plugin uploaded?
