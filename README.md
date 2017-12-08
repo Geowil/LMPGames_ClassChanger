@@ -77,7 +77,7 @@ ClassChanger ItemCost Off
 
 To change the cost item used by the item cost system from in-game you can use the following plugin command:
 
-`ClassChange Cost Item #'
+`ClassChange Cost Item #`
 
 Where _#_ is the item ID for the item you wish to use.
 
