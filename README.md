@@ -9,8 +9,10 @@ Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_ClassChanger#
 
 Terms of Use: Free non-commercially or commercially; just give credit
 
+<a href="http://s15.photobucket.com/user/Geowil/media/Plugins/class%20changer%20v1.2_zpsi6h55kui.png.html" target="_blank"><img src="http://i15.photobucket.com/albums/a367/Geowil/Plugins/class%20changer%20v1.2_zpsi6h55kui.png" border="0" alt=" photo class changer v1.2_zpsi6h55kui.png"/></a>
+
 <p align="center"> 
-<img src="http://i15.photobucket.com/albums/a367/Geowil/Plugins/geowil_classchanger10_zpswmwaqsvf.png" border="0" alt=" photo geowil_classchanger10_zpswmwaqsvf.png"/></a>
+<img src="http://i15.photobucket.com/albums/a367/Geowil/Plugins/class%20changer%20v1.2_zpsi6h55kui.png" border="0" alt=" photo class%20changer%20v1.2_zpsi6h55kui.png"/></a>
 </p>
 
 ## What is this?
