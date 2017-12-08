@@ -1,7 +1,9 @@
 # Geowil_ClassChanger
-Version: 1.1.2
+Version: 1.2.0
 
 Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo.rar)
+
+Project File: Yes, [Geowil_ClassChangeDemoProject.rar](http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemoProject.rar)
 
 Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_ClassChanger#conflicts) section
 
@@ -63,6 +65,23 @@ Finally just add the following plugin command to an event
 `StartClassChange`
 
 
+To change either the gold of item cost systems on or off from in-game, you can use the following plugin commands:
+
+```
+ClassChanger GoldCost On
+ClassChanger GoldCost Off
+ClassChanger ItemCost On
+ClassChanger ItemCost Off
+```
+
+
+To change the cost item used by the item cost system from in-game you can use the following plugin command:
+
+`ClassChange Cost Item #'
+
+Where _#_ is the item ID for the item you wish to use.
+
+
 
 ## Current Features
 - Allows adding requirements to change classes through use of note tags.
@@ -70,15 +89,17 @@ Finally just add the following plugin command to an event
 - Keeps track of each characters used classes and their levels with those classes and then displays that information within the scene for easy reference.
 - Class requirements are color coded and changeable through parameters so that you can change the color code however you like. By default, character classes that meet a requirement are green and those that do not are red.
 - Freely change between classes. Using existing functionality in MV along with some added bits to retain levels, exp, and removal of prior class skills.
+- Optional feature to enable a cost in gold to change to a class
+- Optional feature to enable a cost in item(s) to change to a class (can be enabled at the same time as the gold cost option)
+- Color coding the complete class list to show players what classes their character is eligible to change to without having to select that class to view the requirements.
+
 
 
 ## Planned Features
-- Optional feature to enable a cost in gold to change to a class
-- Optional feature to enable a cost in item(s) to change to a class (can be enabled at the same time as the gold cost option)
 - Optional feature to restrict classes to genders
 - Optional feature to create non-level based requirements and allow a requirement to be made using either an item or equipment.
 - Supporting classes that do not have any requirements (this might already work but I have not tested this use case)
-- Color coding the complete class list to show players what classes their character is eligible to change to without having to select that class to view the requirements.
+
 
 
 ## Conflicts
@@ -92,6 +113,12 @@ Right know there are no known conflicts however anything that aliases the follow
 
 
 ## Version Changelogs
+- Version 1.2.0 Changelog:
+  - Added new feature to allow a cost in gold to be applied and required when changing classes.  Also included plugin command to turn this system on or off.
+  - Added new feature to allow a cost in a set item to be applied and required when changing classes.  Also included plugin commands to turn this system on or off and to change the required item.
+  - Added a new feature to color code the full class list depending on if the player can change to that class or not.  Only considers the class requirements.  Plugin parameters added to change the colors.
+  - Fixed a bug which resulted in sometimes not being able to change to an class that has been activated before right after changing to a new class.
+
 - Version 1.1.2 Changelog:
   - Fixed a bug that was causing exceptions to be thrown when viewing the last class
   - Fixed a bug which caused the requirements from the previous class in the class list to show up as the requirements for the current class.
