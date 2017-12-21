@@ -146,12 +146,24 @@ function Window_CCCost(){
 	var bCostModeEnabled = bIsGldCstEnabled === true || bIsItmCstEnabled === true ? true:false; 
 	var weaponFormStart = "<Requirements>";
 	var weaponFormEnd = "<\/Requirements>";
-	var classReqJSON = {};
+	var classReqsJSON = [];
+	var actorGenders = {};
 	var sysClassList = {};
 	var goldCost = 0;
 	var itemCost = 0;
 	var bHasBeenThisClass = false;
 	var bIsAlreadyThisClass = false;
+
+	var reqClasses = [];
+	var reqGender = [];
+	var reqItems = [];
+	var reqWeaps = [];
+	var reqArmor = [];
+	var reqLvls = {};
+	var actClsKeys = [];
+	var bActorCanChange = false;
+
+	var rstcClssList = {};
 
 	/* Database Manager */
 	var DataManager_isDatabaseLoaded = DataManager.isDatabaseLoaded;
@@ -162,45 +174,135 @@ function Window_CCCost(){
 	}
 
 	DataManager.loadClassReqTags = function(){
-		var group = $dataClasses;
+		var clsGroup = $dataClasses;
+		var actGroup = $dataActors;
 		//alert(JSON.stringify(group));
-		this.load_classtags(group);
+		this.loadClassTags(clsGroup);
+		this.loadActorTags(actGroup);
+
 	}
 
-	DataManager.load_classtags = function(group){
+	DataManager.loadClassTags = function(group){
 		for (var n = 1; n < group.length; n++){
 			var obj = group[n];
-			var reqs = {};
+			var tempReqs = {};
+			var reqs = [];
 
-			if (obj.note != "" && obj.note !== null) {
-				//alert(obj.note);
-				var noteData = obj.note.split(/[\r\n]+/);
-				//alert(JSON.stringify(noteData));
+			if (obj.note !== null && obj.note !== "") {
+				if (obj.note !== "\r" && obj.note !== "\n"){
+					//alert(obj.note);
+					var noteData = obj.note.split(/[\r\n]+/);
+					//alert(JSON.stringify(noteData));
 
-				noteData.forEach(function(str){
-					//alert(str);
-					switch (str){
-						case weaponFormStart:
-							break;
-						case weaponFormEnd:
-							break;
-						default:
-							var reqData = str.split(':');
-							//if (reqData[0] !== 0){
-								reqs[parseInt(reqData[0])] = reqData[1];
-							//}
+					noteData.forEach(function(str){
+						//alert(str);
+						switch (str){
+							case weaponFormStart:
+								break;
+							case weaponFormEnd:
+								break;
+							default:
+								var reqData = str.split(':');
+			                    if (reqData[0] === "Gender"){
+			                    	tempReqs["Type"] = reqData[0];
+			                      	tempReqs["Gender"] = reqData[1];			                      
+			                    }
+			                    else if (reqData[0] === "Item"){
+			                    	tempReqs["Type"] = reqData[0];
+			                    	tempReqs["ItemId"] = reqData[1];
+			                    }
+			                    else if (reqData[0] === "Weapon"){
+			                    	tempReqs["Type"] = reqData[0];
+			                    	tempReqs["WeapId"] = reqData[1];
 
-							break;
-					}
-				});
+			                    	if (reqData.length === 3){			                    		
+			                    		tempReqs[reqData[2]] = true;			                    		
+			                    	}
 
-				classReqJSON[obj.id] = reqs;
+			                    	else if (reqData.length === 4){
+			                    		tempReqs[reqData[2]] = true;			                    		
+			                    		tempReqs[reqData[3]] = true;			                    		
+			                    	}
+			                    }
+			                    else if (reqData[0] === "Armor"){
+			                    	tempReqs["Type"] = reqData[0];
+			                    	tempReqs["ArmorId"] = reqData[1];
 
-				var keys = Object.keys(classReqJSON);
+			                    	if (reqData.length === 3){			                    		
+			                    		tempReqs[reqData[2]] = true;			                    		
+			                    	}
+
+			                    	else if (reqData.length === 4){
+			                    		tempReqs[reqData[2]] = true;			                    		
+			                    		tempReqs[reqData[3]] = true;			                    		
+			                    	}
+			                    }
+			                    else if (reqData[0] === "Class"){
+			                    	tempReqs["Type"] = reqData[0]; //Setup the object type; class
+			                    	tempReqs[parseInt(reqData[1])] = reqData[2]; //Parse the class id to an int and set val the lvl
+			                    }
+
+			                    reqs.push(tempReqs);
+								tempReqs = {};
+
+								break;
+						}
+					});
+				}
+				else{
+					reqs.push(tempReqs);
+				}
+
+				classReqsJSON[obj.id] = reqs;
+
+				var keys = Object.keys(classReqsJSON);
 				for (var i1 = 0; i1 < keys.length; i1++){
 					sysClassList[i1] = keys[i1];
 				}
 			}
+			else{
+				if (obj.id !== null){
+					classReqsJSON[obj.id] = "No Reqs";
+				}
+			}
+		}
+	}
+
+	DataManager.loadActorTags = function(group){
+		for (var n = 1; n < group.length; n++){
+			var obj = group[n];
+			var tempGender = {};
+			var tempObj = {};
+			
+			if (obj.note !== null) {
+				if (obj.note !== ""){
+					//alert(obj.note);
+					var noteData = obj.note.split(/[\r\n]+/);
+					//alert(JSON.stringify(noteData));
+
+					noteData.forEach(function(str){
+						//alert(str);
+						switch (str){
+							case weaponFormStart:
+								break;
+							
+							case weaponFormEnd:
+								break;
+							
+							default:
+								var genData = str.split(':');
+
+								tempObj[genData[0]] = genData[1];
+
+								tempGender = tempObj;
+								tempObj = {};
+								break;
+						}
+					});
+				}
+			}
+
+			actorGenders[obj.id] = tempGender;
 		}
 	}
 
@@ -214,8 +316,6 @@ function Window_CCCost(){
 			for (var i1 = 0; i1 < args.length; i1++){
 				command += " " + args[i1];
 			}
-
-			alert(command);
 		}
 
 		if (command === 'StartClassChange'){
@@ -442,6 +542,9 @@ function Window_CCCost(){
 
 		this._reqWnd.activate();
 		this._reqWnd.show();
+		this._reqWnd.setActor(this._actor);
+		this._reqWnd.refresh();
+
 		//this._comWnd.selectLast();
 		this._comWnd.show();
 		this._comWnd.activate();
@@ -526,7 +629,7 @@ function Window_CCCost(){
 		const winW = Graphics.width - this._clsLstWnd.getWidth();
 		
 
-		this._reqWnd = new Window_ClassInformation(winX,winY,winW,winH);
+		this._reqWnd = new Window_ClassInformation(winX,winY,winW,winH,this._actor);
 		this._reqWnd.deactivate();
 		this._reqWnd.hide();
 		this.addWindow(this._reqWnd);
@@ -569,7 +672,9 @@ function Window_CCCost(){
 			this._statWnd.setActor(actor);
 			this._actClsWnd.setActor(actor);
 			this._clsLstWnd.setActor(actor);
+			this._reqWnd.setActor(actor);
 			this._statWnd.refresh();
+			this._reqWnd.refresh();
 			this._actClsWnd.refresh();
 			this._comWnd.refresh();
 
@@ -747,7 +852,7 @@ function Window_CCCost(){
 	}
 
 	Window_ClassList.prototype.maxItems = function(){
-		return classReqJSON ? Object.keys(classReqJSON).length : 1;
+		return classReqsJSON ? Object.keys(classReqsJSON).length : 1;
 	}
 
 	Window_ClassList.prototype.itemHeight = function(){
@@ -782,7 +887,9 @@ function Window_CCCost(){
 			y += rect.y+rect.height/2 - this.lineHeight() * 0.5;
 			w = rect.width -x - this.textPadding();
 
-			if (!playerCanClassChange(sysClassList[clsId],this._actor)){
+			playerCanClassChange(sysClassList[clsId],this._actor)
+
+			if (!bActorCanChange){
 				this.changeTextColor(cannotChangeColor);
 			} else{
 				this.changeTextColor(canChangeColor);
@@ -812,7 +919,7 @@ function Window_CCCost(){
 		this._selClass = this.index()+1;
 		Window_Selectable.prototype.processOk.call(this);
 		//alert(this.index());
-		this._classData = classReqJSON[this.index()];
+		this._classData = classReqsJSON[this.index()];
 	}
 
 	Window_ClassList.prototype.pendingIndex = function(){
@@ -956,7 +1063,7 @@ function Window_CCCost(){
 	Window_ClassInformation.prototype = Object.create(Window_Base.prototype);
 	Window_ClassInformation.prototype.constructor = Window_ClassInformation;
 
-	Window_ClassInformation.prototype.initialize = function(x,y,w,h){
+	Window_ClassInformation.prototype.initialize = function(x,y,w,h,actor){
 		Window_Base.prototype.initialize.call(this,x,y,w,h);
 		this._winX = x;
 		this._winY = y;
@@ -964,12 +1071,25 @@ function Window_CCCost(){
 		this._winH = h;
 		this._selectedClass = null;
 		this._actClasses = undefined;
+		this._actor = actor;
 
 		this.refresh();
 	}
 
 	Window_ClassInformation.prototype.setActClasses = function(actorClasses){
 		this._actClasses = actorClasses;
+	}
+
+	Window_ClassInformation.prototype.getActClasses = function(){
+		return this._actClasses;
+	}
+
+	Window_ClassInformation.prototype.getActor = function(){
+		return this._actor;
+	}
+
+	Window_ClassInformation.prototype.setActor = function(actor){
+		this._actor = actor;
 	}
 
 	Window_ClassInformation.prototype.getWidth = function(){
@@ -981,79 +1101,8 @@ function Window_CCCost(){
 	}
 
 	Window_ClassInformation.prototype.refresh = function(){
-		//this.contents.clear();
-		var x = 0;
-		var y = 35;
-
-		var selClass = this._selectedClass;
-		var aClss = this._actClasses;
-
-		if (selClass != null || selClass != undefined){
-			this.resetTextColor();
-			this.drawReqs();
-
-			Object.keys(classReqJSON).forEach(function(clsId){
-				if (selClass === parseInt(clsId)){
-					var reqs = classReqJSON[clsId];
-
-					var reqClasses = [];
-
-					Object.keys(reqs).forEach(function(cls){
-						if (cls !== undefined && cls !== null && cls !== "NaN"){
-							reqClasses.push(cls);
-						}
-					});
-
-					var reqLvls = {};
-
-					reqClasses.forEach(function(cls){ reqLvls[cls] = reqs[cls]; });
-
-					var actClsKeys = Object.keys(aClss);
-
-					for (var i1 = 0; i1 < reqClasses.length; i1++){
-						for (var i2 = 0; i2 < actClsKeys.length; i2++){
-							if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1])){
-								if (aClss[reqClasses[i1]] >= parseInt(reqLvls[reqClasses[i1]])){
-									this.drawReqItem($dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,true);
-								} else{
-									this.drawReqItem($dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,false);
-								}
-
-								x += 202;
-
-								if (x >= (this._winW / 1.35)){
-									x = 0;
-									y += 45;
-								}
-
-								break;
-							}
-						}
-					}
-
-					for (var i1 = 0; i1 < reqClasses.length; i1++){
-						for (var i2 = 0; i2 < actClsKeys.length; i2++){
-							if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1]) && i2 !== actClsKeys.length-1){
-								break;
-							}
-							else if (i2 !== 0 && i2 === actClsKeys.length-1){
-								if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1])){
-									break;
-								}else{
-									this.drawReqItem($dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,false);
-									x += 202;
-
-									if (x >= (this._winW / 1.35)){
-										x = 0;
-										y += 45;
-									}
-								}
-							}
-						}
-					}
-				}
-			}, this);
-		}
+		this.contents.clear();
+		processRequirements(this);
 	}
 
 	Window_ClassInformation.prototype.drawReqs = function(){
@@ -1061,9 +1110,20 @@ function Window_CCCost(){
 		this.drawText($dataClasses[sysClassList[this._selectedClass-1]].name + " Requirements: ",0,0,260,'left');
 	}
 
-	Window_ClassInformation.prototype.drawReqItem = function(rClsNm, rClsLv,x,y,bReqIsMet){
+	Window_ClassInformation.prototype.drawReqItem = function(type,reqNm, reqVal,x,y,bReqIsMet){
 		this.contents.fontSize = 18;
-		var txt = rClsNm + " Lv." + String(rClsLv);
+
+		var txt = "";
+		
+		if (type === "Class"){ txt = reqNm + " Lv." + String(reqVal); }
+		else if (type === "Gender") {
+			if (reqNm === "F") { txt = "Female"; }
+			else{ txt = "Male"; } 
+		}
+		else if (type === "Item") { txt = reqNm; }
+		else if (type === "Weap") { txt = reqNm; }
+		else if (type === "Armor") { txt = reqNm; }
+
 		if (!bReqIsMet){
 			this.changeTextColor(failCondColor);
 		} else{
@@ -1078,6 +1138,10 @@ function Window_CCCost(){
 			this._selectedClass = selCls;
 			this.refresh();
 		}
+	}
+
+	Window_ClassInformation.prototype.getSelectedClass = function(selCls){
+		return this._selectedClass;
 	}
 
 	Window_ClassInformation.prototype.clearContents = function(){
@@ -1134,7 +1198,7 @@ function Window_CCCost(){
 	}
 
 	Window_CCCommand.prototype.makeCommandList = function(){
-		var bActorCanChange = false;
+		bActorCanChange = false;
 
 		var selClass = this._selectedClass;
 		var aClss = [];
@@ -1143,7 +1207,7 @@ function Window_CCCost(){
 		
 		//var curCID = this._curACId;
 
-		bActorCanChange = playerCanClassChange(selClass, this._actor);
+		playerCanClassChange(selClass, this._actor);
 
 		if (bActorCanChange){
 			if (bCostModeEnabled){
@@ -1302,8 +1366,38 @@ function Window_CCCost(){
 		}
 	}
 
+	function processRequirements(clsInfoWnd){
+		var bIsRedItem = false;
+
+		var selClass = clsInfoWnd.getSelectedClass();
+		var aClss = clsInfoWnd.getActClasses();
+
+		if (selClass != null || selClass != undefined){
+			clsInfoWnd.resetTextColor();
+			clsInfoWnd.drawReqs();
+
+			rstcClssList = {};
+
+			fillRClssLst();
+
+			Object.keys(classReqsJSON).forEach(function(clsId){
+				if (selClass === parseInt(clsId)){
+					var reqs = classReqsJSON[clsId];
+
+					if (reqs !== "No Reqs"){
+						fillReqVars(reqs,aClss,clsId);					
+						checkRequirements(clsInfoWnd,true,aClss,clsInfoWnd.getActor(),selClass);						
+					}
+					else{
+						bActorCanChange = true;
+					}					
+				}
+			}, clsInfoWnd);
+		}
+	}
+
 	function playerCanClassChange(selClass,actor){
-		var bActorCanChange = false;
+		bActorCanChange = false;
 
 		var aClss = [];
 		var curCID = 0;
@@ -1316,67 +1410,504 @@ function Window_CCCost(){
 		}
 
 		if (selClass != null || selClass != undefined){
-			Object.keys(classReqJSON).forEach(function(clsId){
+			rstcClssList = {};
+
+			fillRClssLst();
+
+			Object.keys(classReqsJSON).every(function(clsId){
 				//If the key (class name) equals the class we want to change to, then continue
 				if (parseInt(clsId) === selClass){
 					//If the actor IS this class already, do not allow change
 					if (curCID === selClass){
 						bActorCanChange = false;
 						bIsAlreadyThisClass = true;
+						return false;
 					}
 					//If the actor has already been this class, don't do this processing
 					else if (aClss[selClass]){
 						bActorCanChange = true;
 						bHasBeenThisClass = true;
+						return false;
 					}
 					else{
 						bIsAlreadyThisClass = false;
 						bHasBeenThisClass = false;
 						//clsId += 1; //Increment it since we are working on a 0-based index now for the json data
-						var reqs = classReqJSON[clsId];
+						var reqs = classReqsJSON[clsId];
 
-						var reqClasses = [];
-
-						Object.keys(reqs).forEach(function(cls){
-							if (cls !== undefined && cls !== null){
-								reqClasses.push(cls);
-							}
-						});
-
-						var reqLvls = {};
-
-						reqClasses.forEach(function(cls){ reqLvls[cls] = reqs[cls]; });
-
-						var actClsKeys = Object.keys(aClss);
+						if (reqs !== "No Reqs"){
+							fillReqVars(reqs,aClss,clsId);
+							checkRequirements(null,false,aClss,actor,selClass);
 
 
-						for (var i1 = 0; i1 < reqClasses.length; i1++){
-							for (var i2 = 0; i2 <actClsKeys.length; i2++){
-								if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1])){
-									if (aClss[reqClasses[i1]] >= parseInt(reqLvls[reqClasses[i1]])) { bActorCanChange = true; }
-									else { bActorCanChange = false; }
 
-									break;
-								}
-							}
+							return false;
 						}
-
-						for (var i1 = 0; i1 < reqClasses.length; i1++){
-							for (var i2 = 0; i2 < actClsKeys.length; i2++){
-								if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1]) && i2 !== actClsKeys.length-1) { break; }
-								else if (i2 !== 0 && i2 === actClsKeys.length-1){
-									if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1])) { break; }
-									else{ bActorCanChange = false; }
-								}
-							}
+						
+						else{
+							bActorCanChange = true;
+							return false;
 						}
 					}
+				}else{
+					return true;
 				}
 			});
 		}
-
-		return bActorCanChange;
-
 	}
 
+	function fillReqVars(reqs,aClss,clssId){
+		var tempObj = {};
+
+		reqClasses = [];
+		reqGender = [];
+		reqItems = [];
+		reqWeaps = {};
+		reqArmor = {};
+		reqLvls = {};
+		actClsKeys = [];
+
+		var rClasses = {}; //Internal use for building the levels array
+
+		for (var i1 = 0; i1 < reqs.length; i1++){
+			//alert(JSON.stringify(tArr));
+			var tArr = reqs[i1];
+			switch(tArr["Type"]){
+				case "Class":
+					Object.keys(tArr).forEach(function(ele){
+						if (ele !== undefined && ele !== null && ele !== "NaN" && ele !== "Type"){	
+							reqClasses.push(ele);
+							rClasses[ele] = tArr[ele];
+						}
+					});
+
+					break;	
+				case "Item":
+					Object.keys(tArr).forEach(function(ele){
+						if (ele !== undefined && ele !== null && ele !== "NaN" && ele !== "Type"){
+							reqItems.push(tArr["ItemId"]);
+						}
+					});
+
+					break;
+				case "Weapon":
+					Object.keys(tArr).forEach(function(ele){
+						if (ele !== undefined && ele !== null && ele !== "NaN" && ele !== "Type"){
+							tempObj[ele] = tArr[ele];							
+						}
+
+						reqWeaps[tArr["WeapId"]] = tempObj;
+						tempObj = {};
+					});
+
+					break;
+
+				case "Armor":
+					Object.keys(tArr).forEach(function(ele){
+						if (ele !== undefined && ele !== null && ele !== "NaN" && ele !== "Type"){
+							tempObj[ele] = tArr[ele];							
+						}
+
+						reqArmor[tArr["ArmorId"]] = tempObj;
+						tempObj = {};
+					});
+
+					break;
+
+				case "Gender":
+					Object.keys(tArr).forEach(function(ele){
+						if (ele !== undefined && ele !== null && ele !== "NaN" && ele !== "Type"){
+							tempObj["Gender"] = tArr["Gender"];
+							reqGender.push(tempObj);
+							tempObj = {};
+						}
+					});
+
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		Object.keys(rClasses).forEach(function(cls){ reqLvls[cls] = rClasses[cls]; });
+		actClsKeys = Object.keys(aClss);
+	}
+
+	function fillRClssLst(){
+		var reqs;
+
+		Object.keys(classReqsJSON).forEach(function(clsId){
+			reqs = classReqsJSON[clsId];
+			var tempArr1 = []; //Weapons
+			var tempArr2 = []; //Armor
+
+			for (var i1 = 0; i1 < reqs.length; i1++){
+				//alert(JSON.stringify(tArr));
+				var tArr = reqs[i1];
+				switch(tArr["Type"]){					
+					case "Weapon":
+						Object.keys(tArr).forEach(function(ele){
+							var tempObj = {};
+
+							if (ele !== undefined && ele !== null && ele !== "NaN" && ele !== "Type"){
+								tempObj[ele] = tArr[ele];							
+							}
+
+							if ((tempObj["Restricted"] !== null && tempObj["Restricted"] !== undefined) &&
+								tempObj["Restricted"] === true){
+								tempArr1.push(tArr["WeapId"]);
+							}
+						});
+
+						break;
+
+					case "Armor":
+						Object.keys(tArr).forEach(function(ele){
+							var tempObj = {};
+
+							if (ele !== undefined && ele !== null && ele !== "NaN" && ele !== "Type"){
+								tempObj[ele] = tArr[ele];							
+							}
+
+							if ((tempObj["Restricted"] !== null && tempObj["Restricted"] !== undefined) &&
+								tempObj["Restricted"] === true){
+								tempArr2.push(tArr["ArmorId"]);
+							}
+						});
+
+						break;
+
+					default:
+						break;
+				}
+			}
+
+			if (tempArr1.length > 0) { 
+				rstcClssList[clsId] = {"Weapons":[]};
+				rstcClssList[clsId]["Weapons"] = tempArr1; 
+
+			}
+
+			if (tempArr2.length > 0) {
+				rstcClssList[clsId] = {"Armor":[]};
+				rstcClssList[clsId]["Armor"] = tempArr2;
+			}
+
+
+		});
+	}
+
+	function checkRequirements(clsIWnd,bIsInfoWindow,aClss,actor,selClass){
+		var x = 0;
+		var y = 35;
+
+		var bWeapArmClssReqOverride = false;
+		var bClassCheckPassed = false;
+		var bGenderCheckPassed = false;
+		var bItemCheckPassed = false;
+		var bWeapCheckPassed = false;
+		var bArmorCheckPassed = false;
+		var bClassesRestricted = false;
+		var rClssId = -1;
+
+		//Required Weapon Processing
+		if (Object.keys(reqWeaps).length > 0){
+			Object.keys(reqWeaps).forEach(function(wId){			
+				if ((reqWeaps[wId]["Replace"] !== null && reqWeaps[wId]["Replace"] !== undefined) &&
+						reqWeaps[wId]["Replace"] === true){
+						bWeapArmClssReqOverride = true;
+				}				
+				
+				if (actor.isEquipped($dataWeapons[wId])){
+					if (bWeapArmClssReqOverride) {
+						bClassCheckPassed = true;
+						bItemCheckPassed = true;
+					}
+
+					if(!bIsInfoWindow){ bWeapCheckPassed = true; }
+					else{ clsIWnd.drawReqItem("Weap",$dataWeapons[wId].name,0,x,y,true); }
+				}
+
+				else{
+					if (bWeapArmClssReqOverride) {
+						bWeapArmClssReqOverride = false;
+						bWeapCheckPassed = true;
+						bClassCheckPassed = false;
+						bItemCheckPassed = false;
+					}
+					else{
+						if(!bIsInfoWindow){ bWeapCheckPassed = false; }
+						else{ clsIWnd.drawReqItem("Weap",$dataWeapons[wId].name,0,x,y,false); }			
+					}
+				}
+
+				if(bIsInfoWindow && !bWeapArmClssReqOverride){
+					x += 202;
+
+					if (x >= (clsIWnd._winW / 1.35)){
+						x = 0;
+						y += 45;
+					}
+				}
+			});
+		} else { bWeapCheckPassed = true }
+
+
+		//Required Armor Processing
+		if (Object.keys(reqArmor).length > 0){
+			Object.keys(reqArmor).forEach(function(aId){			
+				if ((reqArmor[aId]["Replace"] !== null && reqArmor[aId]["Replace"] !== undefined) &&
+						reqArmor[aId]["Replace"] === true){
+						bWeapArmClssReqOverride = true;
+				}				
+				
+				if (actor.isEquipped($dataArmors[aId])){
+					if (bWeapArmClssReqOverride) {
+						bClassCheckPassed = true;
+						bItemCheckPassed = true;
+					}
+
+					if(!bIsInfoWindow){ bArmorCheckPassed = true; }
+					else{ clsIWnd.drawReqItem("Armor",$dataArmors[aId].name,0,x,y,true); }
+				}
+
+				else{
+					if (bWeapArmClssReqOverride) {
+						bWeapArmClssReqOverride = false;
+						bArmorCheckPassed = true;
+						bClassCheckPassed = false;
+						bItemCheckPassed = false;
+					} else{
+						if(!bIsInfoWindow){ bArmorCheckPassed = false; }
+						else{ clsIWnd.drawReqItem("Armor",$dataArmors[aId].name,0,x,y,false); }
+					}
+				}
+
+				if(bIsInfoWindow && !bWeapArmClssReqOverride){
+					x += 202;
+
+					if (x >= (clsIWnd._winW / 1.35)){
+						x = 0;
+						y += 45;
+					}
+				}
+			});
+		} else { bArmorCheckPassed = true }
+
+		//Required Gender Check
+		if (reqGender.length > 0){
+			for (var genId in reqGender){
+				if ((actorGenders[actor.actorId()] !== undefined || actorGenders[actor.actorId()] !== null || Object.keys(actorGenders[actor.actorId()]).length !== 0) && actorGenders[actor.actorId()]["Gender"] === reqGender[0]["Gender"]){
+					if(!bIsInfoWindow){ bGenderCheckPassed = true; }
+					else{ clsIWnd.drawReqItem("Gender",reqGender[0]["Gender"],0,x,y,true); }
+				}
+
+				else{
+					if(!bIsInfoWindow){ bGenderCheckPassed = false; }
+					else{ clsIWnd.drawReqItem("Gender",reqGender[0]["Gender"],0,x,y,false); }
+				}
+
+				if(bIsInfoWindow){
+					x += 202;
+
+					if (x >= (clsIWnd._winW / 1.35)){
+						x = 0;
+						y += 45;
+					}
+				}
+			}
+		} else { bGenderCheckPassed = true }
+
+		if (!bWeapArmClssReqOverride){
+			//Required Class Processing
+			for (var i1 = 0; i1 < reqClasses.length; i1++){
+				for (var i2 = 0; i2 <actClsKeys.length; i2++){
+					var bHasArmorRestriction = false;
+					var bHasWeaponRestriction = false;
+					if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1])){
+						if (aClss[reqClasses[i1]] >= parseInt(reqLvls[reqClasses[i1]])) {
+							if (Object.keys(rstcClssList).length == 0){
+								if(!bIsInfoWindow){ bClassCheckPassed = true; }
+								else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,true); }
+							} else{
+								//Class restrictions exist, check if the player has a weapon or armor that is part of a class restriction
+								checkForRestrictions(actor);
+								if (bActorHasClassRestriction){
+									//Player has a restriction from an equipped item, check if the current selected class has an item restriction
+									if (rstcClssList[selClass] !== undefined && rstcClssList[selClass] !== null){
+										//Current class does have a restriction now determine the item and if the player has it equipped
+
+										if (rstcClssList[selClass]["Weapons"] !== undefined && rstcClssList[selClass]["Weapons"] !== null){
+											var clssWeapons = rstcClssList[selClass]["Weapons"];
+
+											for (var weap in clssWeapons){
+												if (actor.isEquipped($dataWeapons[clssWeapons[weap]])){								
+													bHasWeaponRestriction = true;
+												}
+												else{
+													bHasWeaponRestriction = false;
+												}
+											}
+										}
+
+										if (rstcClssList[selClass]["Armor"] !== undefined && rstcClssList[selClass]["Armor"] !== null){
+											var clssArmor = rstcClssList[selClass]["Armor"];
+
+											for (var armr in clssArmor){
+												if (actor.isEquipped($dataArmors[clssArmor[armr]])){
+													bHasArmorRestriction = true;
+												}
+												else{									
+													bHasArmorRestriction = false;
+												}
+											}
+										}
+
+
+										if ((rstcClssList[selClass]["Armor"] !== undefined && rstcClssList[selClass]["Armor"] !== null) &&
+											(rstcClssList[selClass]["Weapons"] !== undefined && rstcClssList[selClass]["Weapons"] !== null) &&
+											bHasArmorRestriction && bHasWeaponRestriction){
+											if(!bIsInfoWindow){ bClassCheckPassed = true; }
+											else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,true); }
+
+										} else if ((rstcClssList[selClass]["Armor"] !== undefined || rstcClssList[selClass]["Armor"] !== null) && bHasArmorRestriction ){
+											if(!bIsInfoWindow){ bClassCheckPassed = true; }
+											else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,true); }
+
+										} else if ((rstcClssList[selClass]["Weapons"] !== undefined && rstcClssList[selClass]["Weapons"] !== null) && bHasWeaponRestriction ){
+											if(!bIsInfoWindow){ bClassCheckPassed = true; }
+											else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,true); }
+
+										} else{
+											if(!bIsInfoWindow){ bClassCheckPassed = false; }
+											else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,false); }
+										}
+									} else {
+										if(!bIsInfoWindow){ bClassCheckPassed = false; }
+										else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,false); }
+									}
+								} else{
+									if(!bIsInfoWindow){ bClassCheckPassed = true; }
+									else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,true); }
+								}
+							}							
+						} 
+						else {
+							if(!bIsInfoWindow){ bClassCheckPassed = false; }
+							else{ clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,false); }
+						}
+
+						if(bIsInfoWindow){
+							x += 202;
+
+							if (x >= (clsIWnd._winW / 1.35)){
+								x = 0;
+								y += 45;
+							}
+						}
+
+						break;
+					}				
+				}
+			}
+			
+
+			for (var i1 = 0; i1 < reqClasses.length; i1++){
+				for (var i2 = 0; i2 < actClsKeys.length; i2++){
+					if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1]) && i2 !== actClsKeys.length-1) { break; }
+					else if (i2 !== 0 && i2 === actClsKeys.length-1){					
+						if (parseInt(actClsKeys[i2]) === parseInt(reqClasses[i1])) { break; }
+						else{
+							if(!bIsInfoWindow){ bClassCheckPassed = false; }
+							else{
+								clsIWnd.drawReqItem("Class",$dataClasses[reqClasses[i1]].name,reqLvls[reqClasses[i1]],x,y,false);
+								x += 202;
+
+								if (x >= (clsIWnd._winW / 1.35)){
+									x = 0;
+									y += 45;
+								}
+							}
+						}
+					}				
+				}
+			}
+			
+
+			//Required Item Processing
+			if (reqItems.length > 0){
+				for (var itmId in reqItems){
+					if ($gameParty.numItems($dataItems[reqItems[itmId]]) > 0){
+						if(!bIsInfoWindow){ bItemCheckPassed = true; }
+						else{ clsIWnd.drawReqItem("Item",$dataItems[reqItems[itmId]].name,0,x,y,true); }
+					}
+					else{
+						if(!bIsInfoWindow){ bItemCheckPassed = false; }
+						else{ clsIWnd.drawReqItem("Item",$dataItems[reqItems[itmId]].name,0,x,y,false); }
+					}
+
+					if(bIsInfoWindow){
+						x += 202;
+
+						if (x >= (clsIWnd._winW / 1.35)){
+							x = 0;
+							y += 45;
+						}
+					}
+				}
+			} else { bItemCheckPassed = true }
+		}
+
+		if (bClassCheckPassed && bGenderCheckPassed && bItemCheckPassed && bWeapCheckPassed && bArmorCheckPassed){
+			bActorCanChange = true;
+		} else { bActorCanChange = false; }
+	}
+
+	var bActorHasClassRestriction;
+	function checkForRestrictions(actor){
+		var tempObj = {};
+		var tempArr = [];
+		bActorHasClassRestriction = false;
+
+		if (Object.keys(rstcClssList).length > 0){
+			var rClssKeys = Object.keys(rstcClssList);
+
+			for (var i1 = 0; i1 < rClssKeys.length; i1++){
+				if(rstcClssList[rClssKeys[i1]] !== undefined && rstcClssList[rClssKeys[i1]] !== null){
+					if ((rstcClssList[rClssKeys[i1]]["Weapons"] !== undefined &&  rstcClssList[rClssKeys[i1]]["Weapons"] !== null) && rstcClssList[rClssKeys[i1]]["Weapons"].length > 0){
+						var clssWeapons = rstcClssList[rClssKeys[i1]]["Weapons"];
+
+						for (var weap in clssWeapons){
+							if (actor.isEquipped($dataWeapons[clssWeapons[weap]])){								
+								bActorHasClassRestriction = true;
+								break;
+							}
+							else{
+								bActorHasClassRestriction = false;
+							}
+						}
+
+						if (bActorHasClassRestriction){ break; }
+					}
+
+					if ((rstcClssList[rClssKeys[i1]]["Armor"] !== undefined &&  rstcClssList[rClssKeys[i1]]["Armor"] !== null) && rstcClssList[rClssKeys[i1]]["Armor"].length > 0){
+						var clssArmor = rstcClssList[rClssKeys[i1]]["Armor"];
+
+						for (var armr in clssArmor){
+							if (actor.isEquipped($dataArmors[clssArmor[armr]])){
+								bActorHasClassRestriction = true;
+								break;
+							}
+							else{									
+								bActorHasClassRestriction = false;
+							}
+						}
+
+						if (bActorHasClassRestriction){ break; }
+					}
+				}
+			}
+		}
+	}
 })();
