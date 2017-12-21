@@ -153,6 +153,7 @@ requirement use one of the following:
 Weapon:WeapId
 Armor:ArmorId
 </Requirements>
+```
 
 An important note: Make sure that all of your classes have the ability to use any weapons or armor you would allowed to used as a class requirement.  If you
 do not then when you change to the class these requirements are for or change from that class to another the equipment will be removed.  While this does not
