@@ -1,5 +1,5 @@
 # Geowil_ClassChanger
-Version: 1.3.0
+Version: 1.3.1
 
 Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo_V1.3.0.rar)
 
@@ -243,6 +243,9 @@ requirement-less class.  This will change in the future to mitigate this risk.
 
 
 ## Version Changelogs
+- Version 1.3.1 Changelog:
+  - Removed usage of RegExp.$1-9 and replaced with exec() function.
+  
 - Version 1.3.0 Changelog:
   - Added new feature to allow the use of items as requirements for class changing
   - Added new feature to allow equipped weapons and/or armor as requirements for class changing
