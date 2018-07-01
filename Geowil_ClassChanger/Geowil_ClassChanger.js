@@ -329,7 +329,9 @@ function Window_CCCost(){
 		} else if (command === 'ClassChanger GoldCost Off'){
 			toggleGoldCost(false);
 		} else if (command.match(/ClassChanger Change Item[ ](\d+)/)){
-			changeCostItem(parseInt(RegExp.$1));
+			var matches = (/ClassChanger Change Item [ ](\d+)/.exec(command) || []);
+			
+			changeCostItem(parseInt(matches[1]));
 		}
 	}
 
