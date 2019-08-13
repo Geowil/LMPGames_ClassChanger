@@ -1,9 +1,9 @@
 # Geowil_ClassChanger
-Version: 1.3.1
+Version: 1.3.8
 
-Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo_V1.3.0.rar)
+Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://www.lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo_V1.3.8.zip)
 
-Project File: Yes, [Geowil_ClassChangeDemoProject.rar](http://lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemoProject_V1.3.0.rar)
+Project File: Yes, [Geowil_ClassChangeDemoProject.rar](http://www.lmpgames.com/downloads/Geowil_ClassChangeDemo_Project_V1.3.8.zip)
 
 Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_ClassChanger#conflicts) section
 
@@ -243,6 +243,10 @@ requirement-less class.  This will change in the future to mitigate this risk.
 
 
 ## Version Changelogs
+- Version 1.3.8 Changelog:
+  - Fixed a small bug that was preventing non-mouse users from using the plugin. (omeg)
+  - Fixed the project file link and updated demo.
+
 - Version 1.3.1 Changelog:
   - Removed usage of RegExp.$1-9 and replaced with exec() function.
   
