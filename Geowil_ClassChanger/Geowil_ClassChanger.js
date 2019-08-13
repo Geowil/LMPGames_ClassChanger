@@ -1,3 +1,4 @@
+
 /*:
 * @plugindesc Allows class changing using note tags w/ custom menu called by plugin command.
 * @author Geowil
@@ -188,8 +189,8 @@ function Window_CCCost(){
 			var tempReqs = {};
 			var reqs = [];
 
-			if (obj.note !== null && obj.note !== "") {
-				if (obj.note !== "\r" && obj.note !== "\n"){
+			if (obj.note !== null) {
+				if (obj.note !== "" && obj.note !== "\r" && obj.note !== "\n"){
 					//alert(obj.note);
 					var noteData = obj.note.split(/[\r\n]+/);
 					//alert(JSON.stringify(noteData));
@@ -259,7 +260,7 @@ function Window_CCCost(){
 				for (var i1 = 0; i1 < keys.length; i1++){
 					sysClassList[i1] = keys[i1];
 				}
-			}
+			}			
 			else{
 				if (obj.id !== null){
 					classReqsJSON[obj.id] = "No Reqs";
@@ -492,7 +493,7 @@ function Window_CCCost(){
 		this._selActWnd.setHandler('ok',this.onSelActSelected.bind(this));
 		this._selActWnd.setHandler('cancel', this.popScene.bind(this));
 		this._selActWnd.activate();
-		this._selActWnd.select();
+		this._selActWnd.select(0);
 		this.addWindow(this._selActWnd);
 	}
 
@@ -509,7 +510,7 @@ function Window_CCCost(){
 		this._selActWnd.deactivate();
 		this._selActWnd.deselect();
 		this._selActWnd.hide();
-		this._clsLstWnd.select();
+		this._clsLstWnd.select(0);
 		this._clsLstWnd.activate();
 		this._clsLstWnd.show();
 		this._statWnd.activate();
@@ -572,7 +573,7 @@ function Window_CCCost(){
 		this._actClsWnd.hide();
 
 		this._selActWnd.activate();
-		this._selActWnd.select();
+		this._selActWnd.select(0);
 		this._selActWnd.show();
 		this._selActWnd.refresh();
 	}
@@ -692,7 +693,7 @@ function Window_CCCost(){
 
 		this._comWnd.deselect();
 		this._comWnd.hide();
-		this._clsLstWnd.select();
+		this._clsLstWnd.select(0);
 		this._clsLstWnd.activate();
 		this._reqWnd.clearContents();
 		this._reqWnd.deactivate();
@@ -711,7 +712,7 @@ function Window_CCCost(){
 		this._reqWnd.clearContents();
 		this._reqWnd.deactivate();
 		this._reqWnd.hide();
-		this._clsLstWnd.select();
+		this._clsLstWnd.select(0);
 		this._clsLstWnd.activate();
 		this._clsLstWnd.refresh();
 
@@ -1437,7 +1438,7 @@ function Window_CCCost(){
 						//clsId += 1; //Increment it since we are working on a 0-based index now for the json data
 						var reqs = classReqsJSON[clsId];
 
-						if (reqs !== "No Reqs"){
+						if (reqs.length !== 0){
 							fillReqVars(reqs,aClss,clsId);
 							checkRequirements(null,false,aClss,actor,selClass);
 
