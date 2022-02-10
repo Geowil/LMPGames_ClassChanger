@@ -1,23 +1,33 @@
 # Geowil_ClassChanger
-Version: 1.3.8
+Version: 2.0
 
-Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://www.lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo_V1.3.8.zip)
+Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://www.lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo_V2.0.zip)
 
-Project File: Yes, [Geowil_ClassChangeDemoProject.rar](http://www.lmpgames.com/downloads/Geowil_ClassChangeDemo_Project_V1.3.8.zip)
+Project File: Yes, [Geowil_ClassChangeDemoProject.rar](http://www.lmpgames.com/downloads/Geowil_ClassChangeDemo_Project_V2.0.zip)
 
-Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/Geowil_ClassChanger#conflicts) section
+Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/LMPGames_ClassChanger#conflicts) section
 
 Terms of Use: Free non-commercially or commercially; just give credit
 
 
 <p align="center"> 
-<img src="http://i15.photobucket.com/albums/a367/Geowil/Plugins/class%20changer%20v1.2_zpsi6h55kui.png" border="0" alt=" photo class%20changer%20v1.2_zpsi6h55kui.png"/></a>
+<img src="https://www.lmpgames.com/imgs/pbimgs/LMPCCV2.0.PNG" border="0" alt=""/></a>
 </p>
 
 ## What is this?
 This repository is for an RPG Maker MV JS plugin which allows the developer to create class level based restrictions for allowing
 a player to change their classes.  In effect this allows the developer to create a class hierarchy without needing complicated event
-scripting by using class note tags.
+scripting by using class note tags.  It also allows for other conditions and restrictions for class changing.
+
+
+## Requirements
+The only requirement at this time is YanFly's Message Core plugin, which is available for free as part of their Free Starter Pack Essentials on Itch.io.
+
+If you plan to use my Advanced Weapon Plugin with this, you will need to enable support for it in the plugin settings.  It is not required though.
+
+
+## Installation
+Simply download the project file linked above then copy and paste the LMPGames_ClassChanger.js file into your game's plugins folder.  Then do the same for YEP_MessageCore.  Then all you need to do is add the plugins into your game in the plugin manager in the editor.  MessageCore should be above this plugin.
 
 
 ## How does it work?
@@ -45,9 +55,9 @@ about how to accomplish it through an event.
 All that needs to be done is to place this tag into the note box on the class you want to create requirements for:
 
 ```
-<Requirements>
+<LMPCC_Requirements>
 Class:cId:lvl
-</Requirements>
+</LMPCC_Requirements>
 ```
 
 Class = Requirement type
@@ -59,7 +69,7 @@ lvl = required level in that class
 
 Finally just add the following plugin command to an event
 
-`StartClassChange`
+`LMP.StartClassChange`
 
 
 For more on the usage of this plugin, please see the Current Features section below where each feature is covered in detail
@@ -73,48 +83,48 @@ To continue with the example posed in the last section, here is what the require
 So to continue the example above using the Captain class tree, here is how the Captain class note box tag would look:
 
 ```
-<Requirements>
+<LMPCC_Requirements>
 Class:1:45
 Class:2:35
 Class:3:30
-</Requirements>
+</LMPCC_Requirements>
 ```
 
 
-### Gold Cost System
-The Gold Cost system is one of two cost systems available for use in this plugin.  It works by taking the combined sum of a character's class levels
-and using that sum in a formula to determine how much gold to charge to allow the character to change their class.  The more classes and the higher
-the levels of those classes, the more gold it takes to change to a new class.
+### Currency Cost System
+The Currency Cost system is one of two cost systems available for use in this plugin.  It works by taking the combined sum of a character's class levels
+and using that sum in a formula to determine how much game currency to charge to allow the character to change their class.  The more classes and the higher
+the levels of those classes, the more currency it takes to change to a new class.
 
-This system can be controlled in two ways.  First it can be turned on or off from the plugin parameter.  The second way is in-game by using the following
+This system can be controlled in two ways.  First it can be turned on or off from the plugin setting.  The second way is in-game by using the following
 plugin commmand:
 
 ```
-ClassChanger GoldCost On
+LMP.ClassChanger Enable/Disable CurrencyCost
 ```
 
-Use 'Off' instead of 'On' to turn the system off.  The formula which determines the cost can be modified in the plugin parameters.
+The formula which determines the cost can be modified in the note tag for each class.
 
 
 ### Item Cost System
-The Item Cost system is the second of the two cost systems.  Like the Gold Cost system, this system allows you to impose a cost on class changing but instead
+The Item Cost system is the second of the two cost systems.  Like the Currency Cost system, this system allows you to impose a cost on class changing but instead
 of using gold this system uses an item which is defined in the plugin parameters.  The formula to determine the number of items to charge is also available
-for modification in the plugin paramteres and like the Gold Cost system you can either enable or disable this system from the plugin parameters or use the
+for modification in the plugin paramteres and like the Currency Cost system you can either enable or disable this system from the plugin parameters or use the
 following plugin command:
 
 ```
-ClassChanger ItemCost On
+LMP.ClassChanger Enable/Disable ItemCost
 ```
 
-Use 'Off' instead of 'On' to disable the system.  There is also another plugin command for this system to change the cost item from in-game:
+There is also another plugin command for this system to change the cost item from in-game:
 
 ```
-ClassChanger Change Item ItemId
+LMP.ClassChanger ChangeCostItemId ItemID
 
-Example: ClassChanger Change Item 1
+Example: LMP.ClassChanger ChangeCostItemId 1
 ```
 
-You can have both of these systems, the Gold Cost and Item Cost systems, enabled at the same time.
+You can have both of these systems, the Currency Cost and Item Cost systems, enabled at the same time.
 
 
 ### Item Requirements
@@ -122,9 +132,9 @@ The Item Requirements feature allows you to create a class change requirement ba
 system in Bravely Default.  In order to set up an item requirement all you need to do is the following:
 
 ```
-<Requirements>
+<LMPCC_Requirements>
 Item:ID
-</Requirements>
+</LMPCC_Requirements>
 ```
 
 That's it.
@@ -135,12 +145,37 @@ The Gender Requirements feature allows you to allow changing based on gender of 
 you must define the genders of any characters which you want to take advantage of this feature.  To do so, add the following tag to the Actor note box:
 
 ```
-<Requirements>
-Gender:M or F
-</Requirements>
+<LMPCC_Gender>
+Gender:GenderCode
+</LMPCC_Gender>
 ```
 
-Use this same tag within a class note box to define if that class is a male or female only class.
+The system allows you to create whatever gender designations you want to.  In the note tag for the actor, enter in a one letter code to represent the gender.  Once you have creaated all of the genders you wish to use, you will need to update a mapping in the plugin settings.  This can be found under the System Settings subsection, after Cost Item ID:
+
+<p align="center"> 
+<img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_GM.png" border="0" alt=""/></a>
+</p>
+
+
+The default value for this mapping is:
+
+```
+{"Male" : "M", "Female" : "F", "Other" : "O"}
+```
+
+The first value is your full gender name, the second is the code you put in your actor note tags for that gender.
+
+
+Once these are in place, the only thing you need to do is add the gender requirements to any classes that need them using the note tag line below:
+
+
+
+```
+<LMPCC_Requirements>
+Gender:M
+</LMPCC_Requirements>
+```
+
 
 
 ### Weapon and Armor Requirements
@@ -161,21 +196,33 @@ prevent the character from changing back to the class now, at some point in a fu
 correct depending on the number of classes in your game.
 
 
-### Weapon and Armor Restrictions
-The Weapon and Armor Restrictions feature is an advanced feature of the Weapon and Armor Requirements feature.  What this feature does is allow you to restrict
-the classes to which a character can change by the following ways:
+### Restriction System
+The Restriction System allows you to modify how or when a player can change to/from other classes.  There are two restriction modes: Restriction1 and Restriction2.
 
-- Any class that character has been perviously
-- Any class that has that weapon or armor as part of a restriction requirement (meaning that one weapon or armor can be used as a restriction for multiple classes)
-- Any other class which has a different weapon or armor restriction requirement (meaning any other classes that have weapon/armor requirements with a Restricted attribute)
+Restriction1 mode has the following properties:
+- Players can change to any class they have already been
+- If the player has a weapon or armor equipped with a Restriction1 attribute, they may change to the classes designated by the restriction tag
+
+
+Restriction2 mode has the following properties:
+- Players may NOT change to any other class than their current class even if they have been that class before.
+
+Restrictions can be placed on weapons, armor, or items.  If the restriction is on an item, they are in effect so long as the item is in the party's inventory.
+
+Examples of these used in other games:
+Restriction1 is similar to the Asterisk system in Bravely Default where you cannot change to a class until you obtain the Asterisk item for that class.
+
+Restriction2 is similar to a cursed weapon that prevents you from changing classes.  You can set it up so that these are not unequippable by normal means like Golden Sun.
+
+
 
 To create a restriction all you need to do is add an extra attribute to the weapon/armor requirement:
 
 ```
-<Requirements>
-Weapon:WeapId:Restricted
-Armor:ArmorId:Restricted
-</Requirements>
+<LMPCC_Settings>
+Restriction1:ClassID
+Restriction2
+</LMPCC_Settings>
 ```
 
 Again, please note that you can have at maximum one to two weapon restrictions/requirements and 2 to 3 armor restrictions/requirements per class but also you can only have
@@ -184,27 +231,17 @@ classes at any one time until they change to those restricted classes.  At prese
 in the future a plugin command/parameter to enable such a feature may be added.
 
 
-### Weapon and Armor Requirement Replacement
-This feature is another advanced feature of the Weapon and Armor Requirements feature.  This feature allows you to define a requirement based on weapon(s) or armor which will
-override all existing requirements for that class.  In short, it allows a character who does not meet any of the other requirements to change to that class should the weapon(s)
-and/or armor requirements which have the Replace feature defined be equipped.  To use this feature change the weapon or armor requirement tag like so:
+### Bypass System
+The Bypass System allows you to define weapons, armor, or items that will allow the player to change to a designated class WITHOUT meeting the requirements for that class.  There is also an optional plugin setting to re-enable the cost system requirement on bypass.
 
-```
-<Requirements>
-Weapon:WeapId:Replace
-Armor:ArmorId:Replace
-</Requirements>
+To defined a bypass, add the following line to a weapon, armor, or item note tag:
+
+<LMPCC_Settings>
+Bypass:ClassID
+</LMPCC_Settings>
 ```
 
-Some important things to consider.  First, the replace tag only removes class level requirements and item requirements.  If there are non-replace weapon/armor requirements or a
-gender requirement, these requirements must still be met in order to allow the character to change to the class.  Please consider this when setting up multiple weapon/armor
-requirements when using the Replace feature.
-
-Second, once the character has changed to a class using this feature, the character will always be able to change to that class even when the weapon/armor replace requirement
-are no longer equipped and the character does not meet the other requirements.
-
-Third, if the weapon/armor that is part of the replace requirement is no equipped, the other requirements for that class need to be met to change to it.  This feature only has
-an impact when the weapon/armor is equipped.
+An important note to mention is that once a character has changed to a class using this feature, the character will always be able to change to that class even when the bypass condition is no longer in effect on the character (Armor/Weapons were unequipped or the item was sold).
 
 
 ### Classes with no requirements
@@ -212,34 +249,42 @@ If you wish to create a class without any requirements, just leave the note box 
 as the following:
 
 ```
-<Requirements>
-</Requirements>
+<LMPCC_Requirements>
+</LMPCC_Requirements>
 ```
+
+
+## Plugin Settings
+Version 2 has a number of new settings and many of the old ones were overhauled.  Here is a comprehensive list of what these settings are and what they do.
+
+### System Settings
+These are settings that alter the operation of the plugin or are responsible for the proper functioning of the plugin.
+
+- Is LMPGames_AWP Installed - If you are using the AWP, turn this on.  If you do not, you will have issues with weapon requirements.  If you don't use the AWP plugin, leave this turned off.
+- Enable Currency Cost - Turns on the Currency Cost System.  If this is turned on, all classes MUST have a CurrencyFormula note tag attribute.  See the Note Tag section for more information.
+- Enable Item Cost - Turns on the Item Cost System.  If this is turned on, all classes MUST have an ItemFormula note tag attribute.  Additionally, you will need to set the Cost Item ID setting if your cost item is not Item 1 in your database.  If you want to show a
+
 
 
 ## Planned Features/Changes
 -No new features at the moment
 
 Planned Future Changes:
+- None at this time
 
-- Implementation of a parameter to control if Replace requirements should allow changing to that class if the weapon/armor is not equipped and the character does not meet the other requirements
-- Implementation of a parameter to control is weapons and armor in Restricted requirements are required to return to that class
-- Implementation of empty Requirements tag for no-requirement classes instead of an empty note box
-- Extending Replace tag attribute to item requirements.
+
+## Existing Bugs
+There are two bugs that exist in this build to be wary of, both stem from the same problem.  When clikcking in the class list on the left side of the class changer scene, you can sometimes unsync the selected row from where the plugin thinks you are causing the list to change prematurely to another page if you have a lot of classes.
+
+Selecting a class then cancelling from the "Change Class" command window will also have a similar effect.
+
+A fix is in the works.
 
 
 ## Conflicts
-Right know there are no known conflicts however anything that aliases the following functions may conflict with this plugin:
+Right know there are no known conflicts however YanFly's Equipment Core plugin may conflict if you create custom eqipment slots.  This plugin has not yet been tested with YEP_EquipCore so use these together at your own risk.  If you do run into issues, please let us know by creating an issue above in the Issues tab and a compatibility patch or fix will be investigated.
 
-- DataManager.isDatabaseLoaded
-- Game_Interpreter.prototype.pluginCommand
-- Game_Actor.prototype.initialize
-- Game_Actor.prototype.initMembers
-- Game_Actor.prototype.refresh
 
-If you use another plugin which has note tags for classes or actors but does not handle tags which are not apart of that plugin, this plugin will cause problems.  The same is true for
-other plugins which use the class note box in relation to classes which you want no requirements for.  Currently the code for this plugin looks for an empty note box to define a
-requirement-less class.  This will change in the future to mitigate this risk.
 
 
 ## Version Changelogs
