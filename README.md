@@ -540,7 +540,7 @@ A fix is in the works.
 
 
 ## Conflicts
-Right know there are no known conflicts however YanFly's Equipment Core plugin may conflict if you create custom eqipment slots.  This plugin has not yet been tested with YEP_EquipCore so use these together at your own risk.  If you do run into issues, please let us know by creating an issue above in the Issues tab and a compatibility patch or fix will be investigated.
+Right now there are no known conflicts however YanFly's Equipment Core plugin may conflict if you create custom eqipment slots.  This plugin has not yet been tested with YEP_EquipCore so use these together at your own risk.  If you do run into issues, please let us know by creating an issue above in the Issues tab and a compatibility patch or fix will be investigated.
 
 
 
