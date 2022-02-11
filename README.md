@@ -78,6 +78,7 @@ LMP.StartClassChange
 For more on the usage of this plugin, please see the Current Features section below where each feature is covered in detail
 
 
+
 ## Current Features
 ### Class Level Requirements
 As described in the last section, the main usage for this plugin is to assign requirements for class changing by using other class's levels.
@@ -94,6 +95,7 @@ Class:3:30
 ```
 
 
+
 ### Currency Cost System
 The Currency Cost system is one of two cost systems available for use in this plugin.  It works by taking the combined sum of a character's class levels
 and using that sum in a formula to determine how much game currency to charge to allow the character to change their class.  The more classes and the higher
@@ -107,6 +109,7 @@ LMP.ClassChanger Enable/Disable CurrencyCost
 ```
 
 The formula which determines the cost can be modified in the note tag for each class.
+
 
 
 ### Item Cost System
@@ -130,6 +133,7 @@ Example: LMP.ClassChanger ChangeCostItemId 1
 You can have both of these systems, the Currency Cost and Item Cost systems, enabled at the same time.
 
 
+
 ### Item Requirements
 The Item Requirements feature allows you to create a class change requirement based on possession of specific items.  Consider it akin to the Asterisk
 system in Bravely Default.  In order to set up an item requirement all you need to do is the following:
@@ -141,6 +145,7 @@ Item:ID
 ```
 
 That's it.
+
 
 
 ### Gender Requirements
@@ -199,6 +204,7 @@ prevent the character from changing back to the class now, at some point in a fu
 correct depending on the number of classes in your game.
 
 
+
 ### Restriction System
 The Restriction System allows you to modify how or when a player can change to/from other classes.  There are two restriction modes: Restriction1 and Restriction2.
 
@@ -234,6 +240,7 @@ classes at any one time until they change to those restricted classes.  At prese
 in the future a plugin command/parameter to enable such a feature may be added.
 
 
+
 ### Bypass System
 The Bypass System allows you to define weapons, armor, or items that will allow the player to change to a designated class WITHOUT meeting the requirements for that class.  There is also an optional plugin setting to re-enable the cost system requirement on bypass.
 
@@ -248,6 +255,7 @@ Bypass:ClassID
 An important note to mention is that once a character has changed to a class using this feature, the character will always be able to change to that class even when the bypass condition is no longer in effect on the character (Armor/Weapons were unequipped or the item was sold).
 
 
+
 ### Classes with no requirements
 If you wish to create a class without any requirements, just leave the note box for that class blank.  In the future you may be required to change this to an empty Requirements tag such
 as the following:
@@ -258,8 +266,11 @@ as the following:
 ```
 
 
+
+
 ## Plugin Settings
 Version 2 has a number of new settings and many of the old ones were overhauled.  Here is a comprehensive list of what these settings are and what they do.
+
 
 ### System Settings
 These are settings that alter the operation of the plugin or are responsible for the proper functioning of the plugin.
@@ -309,6 +320,8 @@ Mode 2
 - Ignore Skill List - This setting defined the skills that should be ignored when showing class skills in the Class Information window.
 
 
+
+
 ### Font Settings
 These setting groups handle how things are displayed within the plugin
 
@@ -325,6 +338,7 @@ These settings allow you to customize the colors used in various windows.
 - Default Class List Color - Sets the default color of the text in the Class List window.  Used for classes the player has already changed to.
 
 
+
 ### Font Size Settings
 These settings allow you to control the font size in various windows.
 
@@ -338,6 +352,7 @@ These settings allow you to control the font size in various windows.
 - Class Information Group Heading Font Size - Sets the font size for the group headers in the Class Information window.
 - Class Information Sub-Group Heading Font Size - Sets the font size for the subgroup headers in the Class Information window.
 - Class Information Item Font Size - Sets the font size for list items in the Class Information window.
+
 
 
 
@@ -357,6 +372,7 @@ These settings change the x-position of text within various windows
 - Class Information Sub-Group Heading Position - Sets the x position of the sub group headings in the Class Information window.
 - Class Information Item Position - Sets the x position for list items in the Class Information window.
 - Class Information Sub-Item Position - Sets the x position for the list items in the Class Information window.
+
 
 
 ### Heading Settings
@@ -476,7 +492,6 @@ Gender:GenderCode
 
 
 
-
 ### Item/Weapon/Actor Note Tag
 Example:
 
@@ -494,14 +509,13 @@ Bypass:ClassID
 
 
 
-
-
-
 ## Planned Features/Changes
 -No new features at the moment
 
 Planned Future Changes:
 - None at this time
+
+
 
 
 ## Existing Bugs
@@ -510,6 +524,8 @@ There are two bugs that exist in this build to be wary of, both stem from the sa
 Selecting a class then cancelling from the "Change Class" command window will also have a similar effect.
 
 A fix is in the works.
+
+
 
 
 ## Conflicts
