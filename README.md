@@ -261,13 +261,20 @@ An important note to mention is that once a character has changed to a class usi
 
 
 ### Classes with no requirements
-If you wish to create a class without any requirements, just leave the note box for that class blank.  In the future you may be required to change this to an empty Requirements tag such
-as the following:
+To create a class that doesn't have requirements, create an empty note tag as shown below for that class:
+
 
 ```
 <LMPCC_Requirements>
 </LMPCC_Requirements>
 ```
+
+
+
+### Window Scrolling
+A new feature added allows you to hover over certain windows with your mouse to enable window scrolling.  These windows are the Actor Class List window, the Class Requirements window, and the Class Information window.  Currently you need to use the mouse to enable scrolling.  I am researching ways to make this work without a mouse for controller and keyboard players and will update the plugin once I have a solution.
+
+Any window with arrows on the top and bottom are scrollable windows.
 
 
 
@@ -515,9 +522,10 @@ Bypass:ClassID<br/>
 Planned Features:
 - Preventing returning to a lower class
 - Full window size and placement customization support.
+- Instant class changing when meeting requirements on equipping weapons and/or armor
 
 
-Planned Future Changes:
+Planned Changes:
 - Support for non-mouse window scrolling
 
 
