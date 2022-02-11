@@ -368,6 +368,135 @@ This sets the text for the headers in the Actor Class List and Class Requirement
 
 
 
+## Plugin Commands
+Here are the plugin commands and how they are used
+
+```
+LMP.ClassChanger Start
+```
+
+Starts the Class Changer scene
+
+
+
+```
+LMP.ClassChanger Enable/Disable CurrencyCost
+```
+
+Allows you to enable or disable the Currency Cost System from in-game.
+
+
+
+```
+LMP.ClassChanger Enable/Disable ItemCost
+```
+
+Allows you to enable or disable the Item Cost System from in-game.
+
+
+
+```
+LMP.ClassChanger ChangeCostItemID ItemID
+```
+
+Replace ItemID with the item id from the database.  Allows you to change the cost item id for the Currency Cost System from in-game.
+
+
+
+```
+LMP.ClassChanger Enable/Disable GenderRequirements
+```
+
+Allows you to enable or disable the Gender Requirements System from in-game.
+
+
+
+```
+LMP.ClassChanger Enable/Disable ExistingClassBypass
+```
+
+Allows you to enable or disable the Existing Class Requirements Bypass feature from in-game.  See the Plugin Settings section for more information.
+
+
+
+```
+LMP.ClassChanger Enable/Disable UseCostOnBypass
+```
+
+Allows you to enable or disable the User Cost on Bypass feature from in-game.  See the Plugin Settings section for more information.
+
+
+
+
+## Note Tags
+There are three note tags used across several database objects.
+
+
+### Class Note Tag
+Example:
+
+```
+<LMPCC_Requirements>
+Class:1:60
+Class:6:45
+Class:13:35
+Class:12:25
+Weapon:5
+Armor:5
+Desc:A Hero that has fallen into darkness.  They equipped the flame helm to try and light their way.  They also no longer have any hair.
+CurrencyFormula:(avgClassLevels + (10 * 4) / 1.25)
+ItemFormula:((avgClassLevels + (10 * 4) / 1.25) / 10)
+Alias:S. F. Knight
+</LMPCC_Requirements>
+```
+
+Class:ID:Level
+Weapon:WeaponID
+Armor:ArmorID
+Acc:ArmorID - This is for an accessory requirement
+Item:ItemID
+Gender:GenderCode
+Desc:Text
+CurrencyFormula:Formula - Must include avgClassLevels
+ItemFormula:Formula - Must include avgClassLevels
+Alias:Text
+
+
+
+### Actor Note Tag
+Example:
+
+```
+<LMPCC_Gender>
+Gender:M
+</LMPCC_Gender>
+```
+
+Gender:GenderCode
+
+
+
+
+### Item/Weapon/Actor Note Tag
+Example:
+
+```
+<LMPCC_Settings>
+Restriction1:14
+Restriction1:17
+</LMPCC_Settings>
+```
+
+Restriction1:ClassID
+Restriction2 - Just this, see Restriction 2 feature description for more information
+Bypass:ClassID
+
+
+
+
+
+
+
 ## Planned Features/Changes
 -No new features at the moment
 
