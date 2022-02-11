@@ -393,7 +393,7 @@ Here are the plugin commands and how they are used
 LMP.ClassChanger Start
 ```
 
-Starts the Class Changer scene
+Starts the Class Changer scene<br/>
 
 
 
@@ -401,7 +401,7 @@ Starts the Class Changer scene
 LMP.ClassChanger Enable/Disable CurrencyCost
 ```
 
-Allows you to enable or disable the Currency Cost System from in-game.
+Allows you to enable or disable the Currency Cost System from in-game.<br/>
 
 
 
@@ -409,7 +409,7 @@ Allows you to enable or disable the Currency Cost System from in-game.
 LMP.ClassChanger Enable/Disable ItemCost
 ```
 
-Allows you to enable or disable the Item Cost System from in-game.
+Allows you to enable or disable the Item Cost System from in-game.<br/>
 
 
 
@@ -417,7 +417,7 @@ Allows you to enable or disable the Item Cost System from in-game.
 LMP.ClassChanger ChangeCostItemID ItemID
 ```
 
-Replace ItemID with the item id from the database.  Allows you to change the cost item id for the Currency Cost System from in-game.
+Replace ItemID with the item id from the database.  Allows you to change the cost item id for the Currency Cost System from in-game.<br/>
 
 
 
@@ -425,7 +425,7 @@ Replace ItemID with the item id from the database.  Allows you to change the cos
 LMP.ClassChanger Enable/Disable GenderRequirements
 ```
 
-Allows you to enable or disable the Gender Requirements System from in-game.
+Allows you to enable or disable the Gender Requirements System from in-game.<br/>
 
 
 
@@ -433,7 +433,7 @@ Allows you to enable or disable the Gender Requirements System from in-game.
 LMP.ClassChanger Enable/Disable ExistingClassBypass
 ```
 
-Allows you to enable or disable the Existing Class Requirements Bypass feature from in-game.  See the Plugin Settings section for more information.
+Allows you to enable or disable the Existing Class Requirements Bypass feature from in-game.  See the Plugin Settings section for more information.<br/>
 
 
 
@@ -441,7 +441,7 @@ Allows you to enable or disable the Existing Class Requirements Bypass feature f
 LMP.ClassChanger Enable/Disable UseCostOnBypass
 ```
 
-Allows you to enable or disable the User Cost on Bypass feature from in-game.  See the Plugin Settings section for more information.
+Allows you to enable or disable the User Cost on Bypass feature from in-game.  See the Plugin Settings section for more information.<br/>
 
 
 
@@ -468,16 +468,16 @@ Alias:S. F. Knight
 </LMPCC_Requirements>
 ```
 
-Class:ID:Level
-Weapon:WeaponID
-Armor:ArmorID
-Acc:ArmorID - This is for an accessory requirement
-Item:ItemID
-Gender:GenderCode
-Desc:Text
-CurrencyFormula:Formula - Must include avgClassLevels
-ItemFormula:Formula - Must include avgClassLevels
-Alias:Text
+Class:ID:Level<br/>
+Weapon:WeaponID<br/>
+Armor:ArmorID<br/>
+Acc:ArmorID - This is for an accessory requirement<br/>
+Item:ItemID<br/>
+Gender:GenderCode<br/>
+Desc:Text<br/>
+CurrencyFormula:Formula - Must include avgClassLevels<br/>
+ItemFormula:Formula - Must include avgClassLevels<br/>
+Alias:Text<br/><br/>
 
 
 
@@ -504,20 +504,21 @@ Restriction1:17
 </LMPCC_Settings>
 ```
 
-Restriction1:ClassID
-Restriction2 - Just this, see Restriction 2 feature description for more information
-Bypass:ClassID
+Restriction1:ClassID<br/>
+Restriction2 - Just this, see Restriction 2 feature description for more information<br/>
+Bypass:ClassID<br/>
 
 
 
 
 ## Planned Features/Changes
--No new features at the moment
+Planned Features:
+- Preventing returning to a lower class
+- Full window size and placement customization support.
+
 
 Planned Future Changes:
-- None at this time
-
-
+- Support for non-mouse window scrolling
 
 
 ## Existing Bugs
