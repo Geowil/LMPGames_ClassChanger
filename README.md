@@ -69,7 +69,10 @@ lvl = required level in that class
 
 Finally just add the following plugin command to an event
 
-`LMP.StartClassChange`
+
+```
+LMP.StartClassChange
+```
 
 
 For more on the usage of this plugin, please see the Current Features section below where each feature is covered in detail
@@ -236,6 +239,7 @@ The Bypass System allows you to define weapons, armor, or items that will allow 
 
 To defined a bypass, add the following line to a weapon, armor, or item note tag:
 
+```
 <LMPCC_Settings>
 Bypass:ClassID
 </LMPCC_Settings>
@@ -261,8 +265,106 @@ Version 2 has a number of new settings and many of the old ones were overhauled.
 These are settings that alter the operation of the plugin or are responsible for the proper functioning of the plugin.
 
 - Is LMPGames_AWP Installed - If you are using the AWP, turn this on.  If you do not, you will have issues with weapon requirements.  If you don't use the AWP plugin, leave this turned off.
-- Enable Currency Cost - Turns on the Currency Cost System.  If this is turned on, all classes MUST have a CurrencyFormula note tag attribute.  See the Note Tag section for more information.
-- Enable Item Cost - Turns on the Item Cost System.  If this is turned on, all classes MUST have an ItemFormula note tag attribute.  Additionally, you will need to set the Cost Item ID setting if your cost item is not Item 1 in your database.  If you want to show a
+
+- Enable Currency Cost - Turns on the Currency Cost System.  If this is turned on, all classes MUST have a CurrencyFormula note tag attribute.  See the Note Tag section for more information.  In addition, if you wish to show an icon with the currency cost, be sure to set the Currency Icon setting.
+
+- Enable Item Cost - Turns on the Item Cost System.  If this is turned on, all classes MUST have an ItemFormula note tag attribute.  Additionally, you will need to set the Cost Item ID setting if your cost item is not Item 1 in your database.
+
+- Enable Gender Requirements - Turns on gender requirements for classes.  See Gender Requirements Feature section for more informaiton.
+
+- Enable Existing Class Requirement Bypass - Turn on to allow players to change to classes they have been without meeting requirements.
+
+- Use Class Description - Turn on to enable support for Desc note tag attribute to add descriptions to classes.
+
+- Show Extended Parameters - Turn on to show ExParams and SpParams in Class Information window.
+
+- Only Show Non-Zero Parameters - Turn on to hide all parameters with a value of 0.
+
+- Enable Element Trait Icons - Turn on to show element icons in Class Information window.  Make sure you set up Element Trait Icon Mapping for your game.
+
+- Use Aliases - Turn on to enable support afor the Alias note tag attribute to shorten long class names in the plugin windows.
+
+- Use Cost on Bypass - Turn on to re-enable cost requirements when either of the cost systems are turned on when changing to a class using the Bypass Feature.  See the Bypass Feature section for more information.
+
+- Element Resist Display Mode - Setting 1 shows elemental resistances and weaknesses combined.  Setting 2 shows elemental resistances and weaknesses separated.
+
+<p align="center"> 
+Mode 1
+<img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_el1.png" border="0" alt=""/></a>
+</p>
+
+<p align="center"> 
+Mode 2
+<img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_el2.png" border="0" alt=""/></a>
+</p>
+
+
+
+- Currency Icon ID - Set this to display an icon with currency in the currency and cost windows.  Set to 0 to disable this feature.  Only applies with Currency Cost System is enabled.
+
+- Gender Mapping - This is a mapping connecting gender codes used in the note tags for actors and classes to their actual names.  If you add or change the genders used, be sure to update this setting.
+
+- Element Trait Icon Mapping - This setting connects icons to elements to display them with weaknesses and resistances.  If you turn on the Enable Elemental Trait Icons setting, be sure this setting has the appropriate icon ids.
+
+- Ignore Skill List - This setting defined the skills that should be ignored when showing class skills in the Class Information window.
+
+
+### Font Settings
+These setting groups handle how things are displayed within the plugin
+
+
+### Font Color Settings
+These settings allow you to customize the colors used in various windows.
+
+- Cost Requirement Pass Color - Sets the color of the text when the player meets an item or currency cost requirement.
+- Cost Requirement Fail Color - Sets the color of the text when the player doesn't meet an item or currency cost requirement.
+- Class Requirement Pass Text Code - The text code value for the color of the text when the player meets a class requirement.
+- Class Requirement Fail Text Code - The text code value for the color of the text when the player fails to meet a class requirement.
+- Class List Can Change Color - Sets the color of the text in the Class List window when a player can change to a class.
+- Class List Cannot Change Color - Sets the color of the text in the Class List window when a player cannot change to a class.
+- Default Class List Color - Sets the default color of the text in the Class List window.  Used for classes the player has already changed to.
+
+
+### Font Size Settings
+These settings allow you to control the font size in various windows.
+
+- Class List Font size - Sets the font size for the Class List window.
+- Actor Class Content Font Size - Sets the font size for the list of classes in the Actor Class List window.
+- Actor Class Header Font Size - Sets the font size for the header of the Actor Class List window.
+- Class Requirements Heading Font Size - Sets the font size for the header of the Class Requirements window.
+- Class Requirements Group Heading Font Size - Sets the font size for each data group's header in the Class Requirements window.
+- Class Requirements Content Font Size - Sets the font size for the list items in the Class Requirements window.
+- Class Information Heading Font Size - Sets the font size for the header of Class Information window.
+- Class Information Group Heading Font Size - Sets the font size for the group headers in the Class Information window.
+- Class Information Sub-Group Heading Font Size - Sets the font size for the subgroup headers in the Class Information window.
+- Class Information Item Font Size - Sets the font size for list items in the Class Information window.
+
+
+
+### Text Settings
+These settings control text settings in various windows.
+
+
+### Text Position Settings
+These settings change the x-position of text within various windows
+
+- Actor Class List Heading Position - Sets the x position of the Actor Class List window header.
+- Actor Class List Item Position - Sets the x position of the Actor Class List window list items.
+- Class Requirements Heading Position - Sets the x position of the Class Requirement window header.
+- Class Requirements Group Heading Position - Sets the x position of the Class Requirement window group headers.
+- Class Requirements Item Position - Sets the x position of the Class Requirement window list items.
+- Class Information Group Heading Position - Sets the x position of the group headings in the Class Information window
+- Class Information Sub-Group Heading Position - Sets the x position of the sub group headings in the Class Information window.
+- Class Information Item Position - Sets the x position for list items in the Class Information window.
+- Class Information Sub-Item Position - Sets the x position for the list items in the Class Information window.
+
+
+### Heading Settings
+This sets the text for the headers in the Actor Class List and Class Requirements windows
+
+- Actor Classes Header Text
+- Class Requirements Header Text
+
 
 
 
