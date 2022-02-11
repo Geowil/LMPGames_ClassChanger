@@ -196,10 +196,10 @@ for one class this way is either 2 weapon requirements and 2 armor requirements 
 requirement use one of the following:
 
 ```
-<Requirements>
+<LMPCC_Requirements>
 Weapon:WeapId
 Armor:ArmorId
-</Requirements>
+</LMPCC_Requirements>
 ```
 
 An important note: Make sure that all of your classes have the ability to use any weapons or armor you would allowed to used as a class requirement.  If you
