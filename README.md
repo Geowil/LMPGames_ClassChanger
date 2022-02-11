@@ -1,9 +1,9 @@
 # Geowil_ClassChanger
 Version: 2.0
 
-Demo Available: Yes, [LMPGames_ClassChangeDemo.rar](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangeDemo_V2.0.zip)
+Demo Available: Yes, [LMPGames_ClassChangeDemo.zip](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangeDemo_V2.0.zip)
 
-Project File: Yes, [LMPGames_ClassChangeDemoProject.rar](http://www.lmpgames.com/downloads/LMPGames_ClassChangeDemo_Project_V2.0.zip)
+Project File: Yes, [LMPGames_ClassChangeDemoProject.zip](http://www.lmpgames.com/downloads/LMPGames_ClassChangeDemo_Project_V2.0.zip)
 
 Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/LMPGames_ClassChanger#conflicts) section
 
