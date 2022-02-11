@@ -1,9 +1,9 @@
 # Geowil_ClassChanger
 Version: 2.0
 
-Demo Available: Yes, [Geowil_ClassChangeDemo.rar](http://www.lmpgames.com/RMMV/Plugins/Geowil_ClassChangeDemo_V2.0.zip)
+Demo Available: Yes, [LMPGames_ClassChangeDemo.rar](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangeDemo_V2.0.zip)
 
-Project File: Yes, [Geowil_ClassChangeDemoProject.rar](http://www.lmpgames.com/downloads/Geowil_ClassChangeDemo_Project_V2.0.zip)
+Project File: Yes, [LMPGames_ClassChangeDemoProject.rar](http://www.lmpgames.com/downloads/LMPGames_ClassChangeDemo_Project_V2.0.zip)
 
 Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/LMPGames_ClassChanger#conflicts) section
 
@@ -533,6 +533,23 @@ Right know there are no known conflicts however YanFly's Equipment Core plugin m
 
 
 ## Version Changelogs
+- Version 2.0 Changelog:
+  - Complete recode of the plugin
+  - Performance enhancements
+  - Implementation of scrolling windows for several windows
+  - Implementation of customization features
+  - Fixed several bugs around Weapon/Armor/Item Restriction systems
+  - Fixed seveal bugs around gender requirements
+  - Fixed several bugs related to cost systems not properly functioning
+  - Cleaned up the demo
+  - Added in Mr. Demon
+  - Added in small story notes
+  - Added several new plugin settings
+  - Added over 20 new plugin settings
+  - Reworked existing plugin settings
+  - Fixed several issues with plugin commands
+  - Restructured function alias and plugin command names for more uniqueness
+
 - Version 1.3.8 Changelog:
   - Fixed a small bug that was preventing non-mouse users from using the plugin. (omeg)
   - Fixed the project file link and updated demo.
