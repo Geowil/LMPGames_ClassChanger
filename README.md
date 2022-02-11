@@ -302,7 +302,7 @@ These are settings that alter the operation of the plugin or are responsible for
 <p align="center"> 
   Mode 1
 
-  <img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_El1.png" border="0" alt=""/></a>
+  <img style="text-align:center;" src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_El1.png" border="0" alt=""/></a>
 </p>
 
 <p align="center"> 
