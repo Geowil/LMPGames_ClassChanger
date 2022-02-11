@@ -1,9 +1,9 @@
 # LMPGames_ClassChanger
-Version: 2.0
+Version: 2.0.1
 
-Demo Available: Yes, [LMPGames_ClassChangeDemo.zip](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangerDemo_V2.0.zip)
+Demo Available: Yes, [LMPGames_ClassChangeDemo.zip](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangerDemo_V2.0.1.zip)
 
-Project File: Yes, [LMPGames_ClassChangeDemoProject.zip](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangerDemo_Project_V2.0.zip)
+Project File: Yes, [LMPGames_ClassChangeDemoProject.zip](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangerDemo_Project_V2.0.1.zip)
 
 Conflicts: Maybe, see [Conflicts](https://github.com/Geowil/LMPGames_ClassChanger#conflicts) section
 
@@ -546,6 +546,10 @@ Right know there are no known conflicts however YanFly's Equipment Core plugin m
 
 
 ## Version Changelogs
+- Version 2.0.1 Changelog:
+  - Updated plugin help section to remove existing help text and add a link back to the GitHub page
+  - Added the plugin file to the GitHub page in case developers just want it and not the project/demo.
+
 - Version 2.0 Changelog:
   - Complete recode of the plugin
   - Performance enhancements
