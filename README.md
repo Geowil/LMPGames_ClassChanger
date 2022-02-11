@@ -300,13 +300,15 @@ These are settings that alter the operation of the plugin or are responsible for
 - Element Resist Display Mode - Setting 1 shows elemental resistances and weaknesses combined.  Setting 2 shows elemental resistances and weaknesses separated.
 
 <p align="center"> 
-Mode 1
-<img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_El1.png" border="0" alt=""/></a>
+  Mode 1
+
+  <img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_El1.png" border="0" alt=""/></a>
 </p>
 
 <p align="center"> 
-Mode 2
-<img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_El2.png" border="0" alt=""/></a>
+  Mode 2
+
+  <img src="https://www.lmpgames.com/imgs/pbimgs/LMPCC_El2.png" border="0" alt=""/></a>
 </p>
 
 
