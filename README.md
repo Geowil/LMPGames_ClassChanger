@@ -409,7 +409,7 @@ Allows you to enable or disable the Currency Cost System from in-game.<br/>
 LMP.ClassChanger Enable/Disable ItemCost
 ```
 
-Allows you to enable or disable the Item Cost System from in-game.<br/>
+Allows you to enable or disable the Item Cost System from in-game.<br />
 
 
 
@@ -417,7 +417,7 @@ Allows you to enable or disable the Item Cost System from in-game.<br/>
 LMP.ClassChanger ChangeCostItemID ItemID
 ```
 
-Replace ItemID with the item id from the database.  Allows you to change the cost item id for the Currency Cost System from in-game.<br/>
+Replace ItemID with the item id from the database.  Allows you to change the cost item id for the Currency Cost System from in-game.<br />
 
 
 
