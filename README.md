@@ -222,7 +222,7 @@ Restriction2 mode has the following properties:
 
 Restrictions can be placed on weapons, armor, or items.  If the restriction is on an item, they are in effect so long as the item is in the party's inventory.
 
-Examples of these used in other games:
+Examples of these used in other games:<br/>
 Restriction1 is similar to the Asterisk system in Bravely Default where you cannot change to a class until you obtain the Asterisk item for that class.
 
 Restriction2 is similar to a cursed weapon that prevents you from changing classes.  You can set it up so that these are not unequippable by normal means like Golden Sun.
