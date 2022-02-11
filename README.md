@@ -393,7 +393,7 @@ Here are the plugin commands and how they are used
 LMP.ClassChanger Start
 ```
 
-Starts the Class Changer scene<br/>
+Starts the Class Changer scene<br/><br/><br/>
 
 
 
@@ -401,7 +401,7 @@ Starts the Class Changer scene<br/>
 LMP.ClassChanger Enable/Disable CurrencyCost
 ```
 
-Allows you to enable or disable the Currency Cost System from in-game.<br/>
+Allows you to enable or disable the Currency Cost System from in-game.<br/><br/><br/>
 
 
 
@@ -409,7 +409,7 @@ Allows you to enable or disable the Currency Cost System from in-game.<br/>
 LMP.ClassChanger Enable/Disable ItemCost
 ```
 
-Allows you to enable or disable the Item Cost System from in-game.<br />
+Allows you to enable or disable the Item Cost System from in-game.<br/><br/><br/>
 
 
 
@@ -417,8 +417,7 @@ Allows you to enable or disable the Item Cost System from in-game.<br />
 LMP.ClassChanger ChangeCostItemID ItemID
 ```
 
-Replace ItemID with the item id from the database.  Allows you to change the cost item id for the Currency Cost System from in-game.\
-\
+Replace ItemID with the item id from the database.  Allows you to change the cost item id for the Currency Cost System from in-game.<br/><br/><br/>
 
 
 
@@ -426,8 +425,7 @@ Replace ItemID with the item id from the database.  Allows you to change the cos
 LMP.ClassChanger Enable/Disable GenderRequirements
 ```
 
-Allows you to enable or disable the Gender Requirements System from in-game.\
-\
+Allows you to enable or disable the Gender Requirements System from in-game.<br/><br/><br/>
 
 
 
@@ -435,8 +433,7 @@ Allows you to enable or disable the Gender Requirements System from in-game.\
 LMP.ClassChanger Enable/Disable ExistingClassBypass
 ```
 
-Allows you to enable or disable the Existing Class Requirements Bypass feature from in-game.  See the Plugin Settings section for more information.\
-\
+Allows you to enable or disable the Existing Class Requirements Bypass feature from in-game.  See the Plugin Settings section for more information.<br/><br/><br/>
 
 
 
@@ -444,7 +441,7 @@ Allows you to enable or disable the Existing Class Requirements Bypass feature f
 LMP.ClassChanger Enable/Disable UseCostOnBypass
 ```
 
-Allows you to enable or disable the User Cost on Bypass feature from in-game.  See the Plugin Settings section for more information.<br/>
+Allows you to enable or disable the User Cost on Bypass feature from in-game.  See the Plugin Settings section for more information.<br/><br/><br/>
 
 
 
