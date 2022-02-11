@@ -1,4 +1,4 @@
-# Geowil_ClassChanger
+# LMPGames_ClassChanger
 Version: 2.0
 
 Demo Available: Yes, [LMPGames_ClassChangeDemo.zip](http://www.lmpgames.com/RMMV/Plugins/LMPGames_ClassChangerDemo_V2.0.zip)
