@@ -24,6 +24,7 @@ scripting by using class note tags.  It also allows for other conditions and res
 The only requirement at this time is YanFly's Message Core plugin, which is available for free as part of their Free Starter Pack Essentials on Itch.io.
 
 For the Demo: Demo Folder -> www -> js -> plugins
+
 For the Project: Project Folder -> js -> plugins
 
 If you plan to use my Advanced Weapon Plugin with this, you will need to enable support for it in the plugin settings.  It is not required though.
