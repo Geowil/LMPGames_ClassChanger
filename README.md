@@ -75,7 +75,7 @@ Finally just add the following plugin command to an event
 
 
 ```
-LMP.StartClassChange
+LMP.ClassChanger Start
 ```
 
 
